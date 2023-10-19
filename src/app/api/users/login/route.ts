@@ -15,12 +15,13 @@ export async function POST(req: Request) {
       role: "DEV",
     };
 
+    const user ={
+      user: fakeUser,
+      token: token,
+    }
+
     return new Response(
-      JSON.stringify({
-        user: fakeUser,
-        token: token,
-      })
-    );
+      JSON.stringify(user));
   } catch (err: any) {
     return new Response(err, { status: 401 });
   }
