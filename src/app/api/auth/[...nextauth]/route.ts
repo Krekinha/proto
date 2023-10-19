@@ -2,9 +2,6 @@ import { baseUrl } from "@/utils/constants";
 import { User } from "@/utils/types";
 import { Secret } from "jsonwebtoken";
 import NextAuth, {
-  Awaitable,
-  NextAuthOptions,
-  RequestInternal,
 } from "next-auth";
 import { getToken } from "next-auth/jwt";
 import CredentialsProvider from "next-auth/providers/credentials";

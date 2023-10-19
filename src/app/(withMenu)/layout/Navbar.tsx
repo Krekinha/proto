@@ -1,7 +1,6 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import NavDropDownMenu from "./NavDropDownMenu";
 import { useSession } from "next-auth/react";
 import { User } from "@/utils/types";
 import AvatarDropDownMenu from "./AvatarDownMenu";

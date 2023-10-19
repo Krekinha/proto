@@ -1,6 +1,4 @@
 import "@/globals.css";
-import "react-toastify/dist/ReactToastify.css";
-import Script from "next/script";
 
 import Providers from "../../context/Providers";
 import Footer from "./layout/Footer";
