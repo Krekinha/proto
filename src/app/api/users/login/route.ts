@@ -14,17 +14,13 @@ export async function POST(req: Request) {
       email: "krekmg@gmail.com",
       role: "DEV",
     };
-    /*const user = await prisma.user.findFirst({
-      where: {
-        email: email,
-        senha: senha,
-      },
-    });*/
 
-    return Response.json({
-      user: fakeUser,
-      token: token,
-    });
+    return new Response(
+      JSON.stringify({
+        user: fakeUser,
+        token: token,
+      })
+    );
   } catch (err: any) {
     return new Response(err, { status: 401 });
   }
