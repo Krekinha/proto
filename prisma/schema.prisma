@@ -1,0 +1,277 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String
+  sobrenome     String?
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?
+  telefone      String?
+  pix           String?
+  pixTipo       PixTipo?
+  criadoEm      DateTime? @default(now())
+  role          Role      @default(USER)
+  senha         String
+
+  demandas         Demanda[]
+  pagamentoDemanda PagamentoDemanda[]
+  accounts         Account[]
+  sessions         Session[]
+
+  clientesCriados     Cliente[] @relation("clientesCriados")
+  clientesAtualizados Cliente[] @relation("clientesAtualizados")
+  tarefasCriadas      Tarefa[]  @relation("tarefaCriada")
+  tarefasAtribuidas   Tarefa[]  @relation("tarefaAtribuida")
+  tarefasConcluidas   Tarefa[]  @relation("tarefaConcluida")
+}
+
+model Account {
+  id String @id @default(cuid())
+
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model Demanda {
+  id String @id @default(cuid())
+
+  codigo        Int?
+  cliente       Cliente             @relation(fields: [clienteId], references: [id])
+  servico       String
+  responsaveis  User[]
+  prazo         DateTime?
+  linkTrello    String?
+  ciclo         String?
+  pasta         String?
+  evolucao      Evolucao?
+  concluido     Boolean             @default(false)
+  dataConclusao DateTime?
+  monetizacao   MonetizacaoDemanda?
+
+  clienteId String
+
+  @@map(name: "demandas")
+}
+
+model MonetizacaoDemanda {
+  id String @id @default(cuid())
+
+  valor        Decimal
+  despesas     Decimal?
+  pagamentos   PagamentoDemanda[]
+  valorVisivel Boolean            @default(false)
+  demanda      Demanda            @relation(fields: [demandaId], references: [id])
+
+  demandaId String @unique
+
+  @@map(name: "monetizacao_demandas")
+}
+
+model PagamentoDemanda {
+  id String @id @default(cuid())
+
+  colaborador User    @relation(fields: [userId], references: [id])
+  valor       Decimal
+
+  MonetizacaoDemanda   MonetizacaoDemanda? @relation(fields: [monetizacaoDemandaId], references: [id])
+  userId               String
+  monetizacaoDemandaId String
+
+  @@map(name: "pagamento_demandas")
+}
+
+model Evolucao {
+  id String @id @default(cuid())
+
+  tarefas Tarefa[]
+
+  demanda   Demanda @relation(fields: [demandaId], references: [id])
+  demandaId String  @unique
+
+  @@map(name: "evolucoes")
+}
+
+model Tarefa {
+  id String @id @default(cuid())
+
+  criadoPor     User      @relation("tarefaCriada", fields: [userCriouId], references: [id])
+  atribuidoA    User?     @relation("tarefaAtribuida", fields: [userAtribuidoId], references: [id])
+  concluidoPor  User?     @relation("tarefaConcluida", fields: [userConcluiuId], references: [id])
+  dataRegistro  DateTime?
+  descricao     String
+  concluido     Boolean   @default(false)
+  dataConclusao DateTime?
+
+  evolucao        Evolucao @relation(fields: [evolucaoId], references: [id])
+  evolucaoId      String
+  userCriouId     String
+  userAtribuidoId String?
+  userConcluiuId  String?
+
+  @@map(name: "tarefas")
+}
+
+model Cliente {
+  id String @id @default(cuid())
+
+  tipoCliente         String
+  cnpjCpf             String    @unique
+  razaoNome           String
+  naturezaJuridica    String?
+  estadoCivilPf       String?
+  rgPf                String?
+  dnPf                DateTime?
+  email               String?
+  nire                String?
+  optante             Boolean?
+  certificado         Boolean?
+  validadeCertificado DateTime?
+
+  logradouroEmpresa       String?
+  numeroLogradouroEmpresa String?
+  bairroEmpresa           String?
+  cepEmpresa              String?
+  cidadeEmpresa           String?
+  ufEmpresa               String?
+  telefoneEmpresa         String?
+
+  cpfResponsavel              String?
+  nomeResponsavel             String?
+  estadoCivilResponsavel      String?
+  rgResponsavel               String?
+  dnResponsavel               DateTime?
+  logradouroResponsavel       String?
+  numeroLogradouroResponsavel String?
+  bairroResponsavel           String?
+  cepResponsavel              String?
+  cidadeResponsavel           String?
+  ufResponsavel               String?
+  telefoneResponsavel         String?
+
+  codigoSimples String?
+  codigoEcac    String?
+
+  criadoEm      DateTime? @default(now())
+  atualizadoEm  DateTime?
+  criadoPor     User?     @relation("clientesCriados", fields: [userCriouId], references: [id])
+  atualizadoPor User?     @relation("clientesAtualizados", fields: [userAtualizouId], references: [id])
+  demandas      Demanda[]
+
+  userCriouId     String?
+  userAtualizouId String?
+
+  @@map(name: "clientes")
+}
+
+enum Role {
+  USER
+  ADMIN
+  DEV
+}
+
+enum PixTipo {
+  CPF
+  CNPJ
+  CELULAR
+  EMAIL
+  CHAVE
+}
+
+model UsuarioAutorizado {
+  id String @id @default(cuid())
+
+  email String @unique
+
+  @@map(name: "usuarios_autorizados")
+}
+
+model NbmST {
+  id         String        @id @default(cuid())
+  nbm        String?
+  cest       String?
+  mva        MVA[]
+  aplicacao  AplicacaoST[] //relacionamento Implicit many-to-many
+  descricao  String?
+  mensagem   String?
+  capituloId String?
+  capitulo   CapituloST?   @relation(fields: [capituloId], references: [id])
+
+  @@map(name: "nbms_st")
+}
+
+model MVA {
+  id        String  @id @default(cuid())
+  valor     String
+  descricao String?
+  NbmST     NbmST?  @relation(fields: [nbmSTId], references: [id], onDelete: Cascade)
+  nbmSTId   String?
+}
+
+model CapituloST {
+  id        String  @id @default(cuid())
+  numero    String  @unique
+  descricao String?
+  NbmST     NbmST[]
+}
+
+model AplicacaoST {
+  id        String  @id @default(cuid())
+  numero    String  @unique
+  descricao String?
+  nbms      NbmST[] //relacionamento Implicit many-to-many
+
+  @@map("AplicacaoST")
+}
+
+model Monofasico {
+  id          String  @id @default(cuid())
+  ncm         String?
+  grupo       String?
+  codGrupo    String?
+  subGrupo    String?
+  codSubgrupo String?
+  excecao     String?
+
+  @@map(name: "monofasicos")
+}

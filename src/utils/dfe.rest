@@ -1,0 +1,41 @@
+//GET ALL
+GET https://hnfe.fazenda.mg.gov.br/nfe2/services/NFeConsultaProtocolo4 HTTP/1.1
+
+
+####
+// GET ALL VERCEL
+GET http://makit.vercel.app/api/nbm-st/list HTTP/1.1
+
+
+
+
+####
+//ADD ALL
+POST https://hnfe.fazenda.mg.gov.br/nfe2/services/NFeStatusServico4 
+//Content-Type: application/json
+
+<?xml version="1.0" encoding="UTF-8" ?>
+<consStatServ xmlns="http://www.portalfiscal.inf.br/nfe" versao="4.00">
+  <tpAmb>2</tpAmb>
+  <cUF>MG</cUF>
+  <xServ>STATUS</xServ>
+</consStatServ>
+
+
+####
+// GET TESTING
+GET https://www.evernote.com/shard/s714/sh/4648367b-7086-c55c-450d-ddc3a1faaa6f/GJcB5SEwiNAvzQVHD-O8aPqnzpXItvJz0Xmq3kHU3E9a70j5tjGUbDIYYg HTTP/1.1
+
+
+
+####
+//ADD ALL
+POST https://hnfe.fazenda.mg.gov.br/nfe2/services/NFeStatusServico4 
+//Content-Type: application/json
+
+<?xml version="1.0" encoding="UTF-8" ?>
+<consStatServ xmlns="http://www.portalfiscal.inf.br/nfe" versao="4.00">
+  <tpAmb>2</tpAmb>
+  <cUF>MG</cUF>
+  <xServ>STATUS</xServ>
+</consStatServ>

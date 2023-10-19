@@ -1,0 +1,20 @@
+PS D:\dev\repos\nextjs\makit> depcheck               
+Unused dependencies
+* @next-auth/prisma-adapter (removido em 21-05-23)
+* @next/font                (removido em 21-05-23)
+* @rpldy/uploader
+* @tanstack/react-query     (removido em 21-05-23)
+* @types/react-dom
+* @types/react-transition-group
+* formidable                (removido em 21-05-23)
+* multer                    (removido em 21-05-23)
+* pdf-extraction
+* react-transition-group
+* react-use-file-upload
+* remark-gfm                (removido em 21-05-23)
+Unused devDependencies
+* @types/formidable         (removido em 21-05-23)
+* @types/multer             (removido em 21-05-23)
+Missing dependencies
+* pdfreader: .\src\services\parsePDF.ts
+* lodash: .\src\app\(withMenu)\sntools\issretencao\ISSRetencao.tsx

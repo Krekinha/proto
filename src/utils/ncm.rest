@@ -1,0 +1,61 @@
+//GET ALL
+POST http://localhost:3000/api/files/upload HTTP/1.1
+Content-Type: application/json
+
+[
+{
+    "ncm": "ncm2",
+    "grupo": "grupo",
+    "codGrupo": "codGrupo",
+    "subGrupo": "subGrupo",
+    "codSubgrupo": "codSubgrupo",
+    "excecao": false
+},
+{
+    "ncm": "ncm3",
+    "grupo": "grupo",
+    "codGrupo": "codGrupo",
+    "subGrupo": "subGrupo",
+    "codSubgrupo": "codSubgrupo",
+    "excecao": false
+}
+]
+
+####
+// GET ALL VERCEL
+GET http://nfcalc.vercel.app/api/nbm-st/list HTTP/1.1
+
+
+####
+// GET HELLO VERCEL
+GET http://nfcalc.vercel.app/api/teste/hello HTTP/1.1
+
+
+
+####
+//ADD ALL
+POST http://localhost:3000/api/monofasicos/add HTTP/1.1
+Content-Type: application/json
+
+[
+{
+    "ncm": "ncm2",
+    "grupo": "grupo",
+    "codGrupo": "codGrupo",
+    "subGrupo": "subGrupo",
+    "codSubgrupo": "codSubgrupo",
+    "excecao": false
+},
+{
+    "ncm": "ncm3",
+    "grupo": "grupo",
+    "codGrupo": "codGrupo",
+    "subGrupo": "subGrupo",
+    "codSubgrupo": "codSubgrupo",
+    "excecao": false
+}
+]
+
+####
+//ADD ALL
+GET  http://localhost:3000/api/monofasicos/list HTTP/1.1

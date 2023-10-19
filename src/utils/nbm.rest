@@ -1,0 +1,147 @@
+//GET ALL
+GET http://localhost:3000/api/pdf/list HTTP/1.1
+
+
+####
+// GET ALL VERCEL
+GET http://makit.vercel.app/api/nbm-st/list HTTP/1.1
+
+
+
+####
+// GET ALL
+GET http://localhost:3000/api/nbm-st/list HTTP/1.1
+
+
+####
+//ADD ALL
+POST http://localhost:3000/api/nbm-st/addall HTTP/1.1
+Content-Type: application/json
+
+[{
+ "nbm": "nbm01",
+ "cest": "cest01",
+ "capitulo":"3",
+ "aplicacao":"5.1/2.1",
+ "mva": "25/45,8",
+ "descricaoMva": "des55/despp",
+ "descricao": "descricao01",
+ "mensagem": "mensagem01"
+},
+{
+ "nbm": "nbm02",
+ "cest": "cest02",
+ "capitulo":"1",
+ "aplicacao":"1.1",
+ "mva": "30/48,5",
+ "descricaoMva": "desc1/desc2",
+ "descricao": "descricao02",
+ "mensagem": "mensagem03"
+}]
+      
+
+
+####
+
+
+
+// GET TESTING
+
+POST http://localhost:3000/api/users/add HTTP/1.1
+Content-Type: application/json
+
+{
+  "tipoCliente": "pj",
+  "cnpjCpf": "065.091.176-81",
+  "razaoNome": "cliente juro",
+  "naturezaJuridica": null,
+  "email": null,
+  "nire": null,
+  "optante": null,
+  "certificado": null,
+  "logradouroEmpresa": null,
+  "numeroLogradouroEmpresa": null,
+  "bairroEmpresa": null,
+  "cepEmpresa": null,
+  "cidadeEmpresa": null,
+  "ufEmpresa": null,
+  "telefoneEmpresa": null,
+  "cpfResponsavel": null,
+  "nomeResponsavel": null,
+  "estadoCivil": null,
+  "rgResponsavel": null,
+  "dnResponsavel": null,
+  "logradouroResponsavel": null,
+  "numeroLogradouroResponsavel": null,
+  "bairroResponsavel": null,
+  "cepResponsavel": null,
+  "cidadeResponsavel": null,
+  "ufResponsavel": null,
+  "telefoneResponsavel": null,
+  "codigoSimples": null,
+  "codigoEcac": null,
+  "criadoEm": null,
+  "atualizadoEm": null,
+  "userCriouId": "b846e38d-61de-46f8-8a7a-f34210e9aba9",
+  "userAtualizouId": null
+}
+
+####
+
+// GET TESTING
+
+POST http://localhost:3000/api/users/add HTTP/1.1
+Content-Type: application/json
+
+{
+    "email": "dio@gmail.comm",
+    "nome": "djow58",
+    "senha": "da191475"
+}
+
+
+####
+
+// GET TESTING
+
+POST http://localhost:3000/api/nbm-st/teste HTTP/1.1
+Content-Type: application/json
+
+{
+  "ncm": "3919",
+}
+
+
+
+
+
+
+
+
+
+
+
+
+####
+// DELETE ALL
+GET http://localhost:3000/api/nbm-st/deleteAll HTTP/1.1
+
+
+####
+
+
+
+
+// GET ALL
+POST http://localhost:3000/api/nbm-st/teste HTTP/1.1
+Content-Type: application/json
+
+{
+  "ncm": "3919"
+}
+
+
+####
+
+// GET ALL
+GET http://makit.vercel.app/api/nbm-st/teste HTTP/1.1
