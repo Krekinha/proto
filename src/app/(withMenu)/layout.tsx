@@ -18,7 +18,6 @@ export default function RootLayout({
 }) {
   return (
     <html>
-      <Script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.3.200/pdf.js"></Script>
       <body className="bg-gray-800 h-screen flex flex-col">
         <Providers>
           <Navbar />
