@@ -115,31 +115,22 @@ const handler = NextAuth({
       // Persist the OAuth access_token to the token right after signin
       console.log("jwt-token: ", token);
       //console.log("jwt-account: ", account);
-      //console.log("jwt-USER: ", user);
+      console.log("jwt-USER: ", user);
       //console.log("jwt-PROFILE: ", profile);
       //console.log("jwt-ISNEWUSER: ", isNewUser);
 
-      if (user) {
-        token.user = user;
-      }
-      if (token.sub) {
-        return token;
-      } else {
-        throw new Error("Usuário inválido");
-      }
+      user && (token.user = user);
+      return token;
     },
     async session({ session, token, user }) {
       //session.accessToken  = token.accessToken;
       //session.userId = user.id;
-      session.user = token.user as User;
+      session = token.user as any;
       console.log("SESSION_SESSION: ", session);
       //console.log("SESSION_TOKEN: ", token);
       //console.log("SESSION_USER: ", user);
-      if (!token.sub) {
-        throw new Error("Sessão inválida");
-      }
 
-      return { ...session, accessToken: token.sub };
+      return session;
     },
 
     // async redirect({ url, baseUrl }) { return baseUrl },
