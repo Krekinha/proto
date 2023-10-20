@@ -24,14 +24,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts",
-    "src/app/none",
-    "src/app/nfcalc/calcsaida/loading.tsx",
-    "src/app/api/obj/list.ts"
-, "src/app/(withMenu)/settings/SettingsAplicacaoST.tsx", "src/app/(withMenu)/layout/ItemFormulaAADIFAL.tsx"  ],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]
 }
